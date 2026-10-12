@@ -252,11 +252,13 @@ Add a new record to `RAW.airport_comments`. Then materialize the incremental mod
 
 Add your solution in the next lines:
 * Adding a new record:
+  
   ```
   INSERT INTO AIRSTATS.RAW.AIRPORT_COMMENTS(ID, THREAD_REF, AIRPORT_REF, AIRPORT_IDENT, DATE, MEMBER_NICKNAME, SUBJECT, BODY, LOADED_AT)
-VALUES(602622, 82704, 39824, 'SD-0019', '2025-12-14 12:28:47.000','vivek', 'Tought to navigate', 'Flew Juba to Agok and return 12/2025', CURRENT_TIMESTAMP());
+  VALUES(602622, 82704, 39824, 'SD-0019', '2025-12-14 12:28:47.000','vivek', 'Tought to navigate', 'Flew Juba to Agok and return 12/2025', CURRENT_TIMESTAMP());
   ```
 * Command to execute to update this model (but only this model, not all the models):
+  
   ```
   dbt run -s silver_airport_comments
   ``` 
@@ -266,6 +268,7 @@ VALUES(602622, 82704, 39824, 'SD-0019', '2025-12-14 12:28:47.000','vivek', 'Toug
       WHERE COMMENT_ID = 602622;
   2) COMMENT_ID	AIRPORT_IDENT	COMMENT_TIMESTAMP	MEMBER_NICKNAME	COMMENT_SUBJECT	COMMENT_BODY	LOADED_AT
 602622	SD-0019	2025-12-14 12:28:47.000	vivek	Tought to navigate	Flew Juba to Agok and return 12/2025	2026-10-12 02:59:22.038 -0700
+     
   ``` 
 
 **Requirements** 
