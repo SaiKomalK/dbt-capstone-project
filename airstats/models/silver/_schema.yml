@@ -1,0 +1,64 @@
+models:
+  - name: silver_airport_comments
+    columns:
+      - name: comment_id
+        description: "airport comments primary key column"
+        data_tests:
+          - unique
+          - not_null
+
+      - name: comment_timestamp
+        data_tests:
+          - not_null
+
+      - name: airport_ident
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('silver_airports')
+                field: airport_ident
+              config:
+                severity: warn
+
+
+  - name: silver_airports
+    columns:
+      - name: airport_ident
+        description: "airports primary key column"
+        data_tests:
+          - unique
+          - not_null
+
+      - name: airport_type
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['small_airport', 'heliport', 'closed', 'medium_airport', 'seaplane_base', 'large_airport', 'balloonport']
+
+      - name: airport_name
+        data_tests:
+          - not_null
+
+      - name: iso_country
+        data_tests:
+          - not_null
+
+  - name: silver_runways
+    columns:
+      - name: runway_id
+        description: "runways primary key column"
+        data_tests:
+          - unique
+          - not_null
+
+      - name: runway_closed
+        data_tests:
+          - not_null
+
+      - name: airport_ident
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('silver_airports')
+                field: airport_ident
