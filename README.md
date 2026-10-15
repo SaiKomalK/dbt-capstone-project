@@ -252,18 +252,23 @@ Add a new record to `RAW.airport_comments`. Then materialize the incremental mod
 
 Add your solution in the next lines:
 * Adding a new record:
+  
   ```
-  REPLACE THIS CODE BLOCK BY PASTING THE SQL for adding a new record to `RAW.airport_comments`
+  INSERT INTO AIRSTATS.RAW.AIRPORT_COMMENTS(ID, THREAD_REF, AIRPORT_REF, AIRPORT_IDENT, DATE, MEMBER_NICKNAME, SUBJECT, BODY, LOADED_AT)
+  VALUES(602622, 82704, 39824, 'SD-0019', '2025-12-14 12:28:47.000','vivek', 'Tought to navigate', 'Flew Juba to Agok and return 12/2025', CURRENT_TIMESTAMP());
   ```
 * Command to execute to update this model (but only this model, not all the models):
+  
   ```
-  REPLACE THIS CODE BLOCK BY PASTING THE dbt COMMAND YOU EXECUTED
+  dbt run -s silver_airport_comments
   ``` 
 * Execute an SQL on the Snowflake UI to ensure the new record has been added:
   ```
-  REPLACE THIS CODE BLOCK BY PASTING 
-  1) THE SQL to extract the new record from `silver_airport_comments`
-  2) THE result you see in Snowflake
+  1) SELECT * FROM AIRSTATS.DEV.SILVER_AIRPORT_COMMENTS
+      WHERE COMMENT_ID = 602622;
+  2) COMMENT_ID	AIRPORT_IDENT	COMMENT_TIMESTAMP	MEMBER_NICKNAME	COMMENT_SUBJECT	COMMENT_BODY	LOADED_AT
+     602622	SD-0019	2025-12-14 12:28:47.000	vivek	Tought to navigate	Flew Juba to Agok and return 12/2025	2026-10-12 02:59:22.038 -0700
+     
   ``` 
 
 **Requirements** 
@@ -281,11 +286,13 @@ The airport `Los Angeles County Sheriff's Department Heliport` (airport_ident: `
 
 * Updating the record to "closed":
   ```
-  REPLACE THIS BLOCK BY PASTING THE SQL you executed
+  UPDATE AIRSTATS.RAW.AIRPORTS
+  SET TYPE = 'closed'
+  WHERE IDENT = '01CN';
   ```
 * Command to execute and snapshot update:
   ```
-  REPLACE THIS CODE BLOCK BY PASTING THE dbt COMMAND YOU EXECUTED
+  dbt snapshot
   ``` 
 
 #### Analyses
