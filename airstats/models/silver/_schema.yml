@@ -1,5 +1,6 @@
 models:
   - name: silver_airport_comments
+    description: "{{ doc('silver_airport_comments') }}"
     columns:
       - name: comment_id
         description: "airport comments primary key column"
